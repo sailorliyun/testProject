@@ -1,0 +1,51 @@
+
+
+spring:
+  mandatory-file-encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+    multipart:
+      enabled: true
+      file-size-threshold: 1MB
+      max-file-size: 10MB
+      max-request-size: 15MB
+      #location: /mirrorlife/temp/
+  profiles:
+    active: development
+  freemarker:
+    check-template-location: false
+
+
+server:
+  port: 8086
+  context-path: /test
+  ssl:
+    enabled: false
+
+---
+
+spring:
+  profiles: test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql://localhost/mirrorlife
+    username: mirrorlife
+    password: mirrorlife
+    hikari:
+      idle-timeout: 60000
+      maximum-pool-size: 50
+  jooq:
+    sql-dialect: postgres_9_5
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+    multipart:
+      enabled: true
+      file-size-threshold: 1MB
+      max-file-size: 10MB
+      max-request-size: 15MB
+      #location: /mirrorlife/temp/
